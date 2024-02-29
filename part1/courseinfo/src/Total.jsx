@@ -1,9 +1,12 @@
 function Total({ parts }) {
   return (
-    <p>
-      Total number of exercises:{" "}
-      {parts.reduce((acc, item) => acc + item.exercises, 0)}
-    </p>
+    <>
+      <hr />
+      <p>
+        Total number of exercises:{" "}
+        {parts.reduce((acc, item) => acc + item.exercises, 0)}
+      </p>
+    </>
   );
 }
 
