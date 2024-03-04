@@ -2,11 +2,14 @@ import { useState } from "react";
 
 export default function App() {
   const [reviews, setReviews] = useState({ good: 0, neutral: 0, bad: 0 });
+  const isFeedbackGathered = Boolean(
+    reviews.good || reviews.neutral || reviews.bad
+  );
 
   return (
     <>
       <FeedbackPanel setReviews={setReviews} />
-      <Stats reviews={reviews} />
+      <Stats reviews={reviews} isFeedbackGathered={isFeedbackGathered} />
     </>
   );
 }
@@ -28,7 +31,7 @@ function FeedbackPanel({ setReviews }) {
   );
 }
 
-function Stats({ reviews }) {
+function Stats({ reviews, isFeedbackGathered }) {
   const total = reviews.good + reviews.neutral + reviews.bad;
   const average = (reviews.good - reviews.bad) / total;
   const positive = (reviews.good / total) * 100;
@@ -36,17 +39,23 @@ function Stats({ reviews }) {
   return (
     <>
       <h2>statistics</h2>
-      <ul>
-        <li>Good: {reviews.good}</li>
-        <li>Neutral: {reviews.neutral}</li>
-        <li>Bad: {reviews.bad}</li>
-      </ul>
-      <hr />
-      <ul>
-        <li>All: {total}</li>
-        <li>Average: {average}</li>
-        <li>Positive: {positive} %</li>
-      </ul>
+      {isFeedbackGathered ? (
+        <>
+          <ul>
+            <li>Good: {reviews.good}</li>
+            <li>Neutral: {reviews.neutral}</li>
+            <li>Bad: {reviews.bad}</li>
+          </ul>
+          <hr />
+          <ul>
+            <li>All: {total}</li>
+            <li>Average: {average}</li>
+            <li>Positive: {positive} %</li>
+          </ul>
+        </>
+      ) : (
+        <p>No feedback given</p>
+      )}
     </>
   );
 }
