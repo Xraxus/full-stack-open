@@ -15,25 +15,49 @@ const App = () => {
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState({});
 
+  function getMostVotes() {
+    if (JSON.stringify(votes) === "{}") return "no votes yet";
+    const voteEntries = Object.entries(votes);
+    let max = voteEntries[0];
+
+    for (const [key, value] of voteEntries) {
+      if (value >= max[1]) max = [key, value];
+    }
+
+    return (
+      <>
+        <p>{anecdotes[max[0]]}</p>
+        <p>has {max[1]} votes</p>
+      </>
+    );
+  }
+
   return (
-    <div>
-      <p>{anecdotes[selected]}</p>
-      <p>has {votes[selected] || "no"} votes</p>
-      <button
-        onClick={() => {
-          setVotes({ ...votes, [selected]: votes[selected] + 1 || 1 });
-        }}
-      >
-        vote
-      </button>
-      <button
-        onClick={() => {
-          setSelected(Math.floor(Math.random() * anecdotes.length));
-        }}
-      >
-        another anecdote
-      </button>
-    </div>
+    <>
+      <div>
+        <h2>Anecdote of the day</h2>
+        <p>{anecdotes[selected]}</p>
+        <p>has {votes[selected] || "no"} votes</p>
+        <button
+          onClick={() => {
+            setVotes({ ...votes, [selected]: votes[selected] + 1 || 1 });
+          }}
+        >
+          vote
+        </button>
+        <button
+          onClick={() => {
+            setSelected(Math.floor(Math.random() * anecdotes.length));
+          }}
+        >
+          another anecdote
+        </button>
+      </div>
+      <div>
+        <h2>Anecdote with most votes</h2>
+        {getMostVotes()}
+      </div>
+    </>
   );
 };
 
