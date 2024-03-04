@@ -29,6 +29,10 @@ function FeedbackPanel({ setReviews }) {
 }
 
 function Stats({ reviews }) {
+  const total = reviews.good + reviews.neutral + reviews.bad;
+  const average = (reviews.good - reviews.bad) / total;
+  const positive = (reviews.good / total) * 100;
+
   return (
     <>
       <h2>statistics</h2>
@@ -36,6 +40,12 @@ function Stats({ reviews }) {
         <li>Good: {reviews.good}</li>
         <li>Neutral: {reviews.neutral}</li>
         <li>Bad: {reviews.bad}</li>
+      </ul>
+      <hr />
+      <ul>
+        <li>All: {total}</li>
+        <li>Average: {average}</li>
+        <li>Positive: {positive} %</li>
       </ul>
     </>
   );
