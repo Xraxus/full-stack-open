@@ -20,6 +20,7 @@ function FeedbackPanel({ setReviews }) {
 
   return (
     <>
+      <h2>Give feedback</h2>
       <button onClick={() => handleClick("good")}>good</button>
       <button onClick={() => handleClick("neutral")}>neutral</button>
       <button onClick={() => handleClick("bad")}>bad</button>
