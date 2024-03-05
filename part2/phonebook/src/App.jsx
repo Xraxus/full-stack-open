@@ -6,7 +6,9 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    setContacts([...contacts, { name: newName }]);
+    if (contacts.some((contact) => contact.name === newName))
+      alert(`${newName} is already in the phonebook`);
+    else setContacts([...contacts, { name: newName }]);
     setNewName("");
   }
 
