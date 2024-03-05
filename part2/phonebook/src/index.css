@@ -3,3 +3,9 @@
   line-height: 1.5;
   font-weight: 400;
 }
+
+.flex-column {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.5em;
+}
