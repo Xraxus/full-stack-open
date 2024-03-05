@@ -1,18 +1,22 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import axios from "axios";
 
 function App() {
-  const [contacts, setContacts] = useState([
-    { name: "Arto Hellas", tel: 123456789 },
-    { name: "Ada Lovelace", tel: 394453235 },
-    { name: "Dan Abramov", tel: 12432343 },
-    { name: "Mary Poppendieck", tel: 392364231 },
-  ]);
+  const [contacts, setContacts] = useState([]);
   const [newName, setNewName] = useState("");
   const [newTel, setNewTel] = useState("");
   const [filterName, setFilterName] = useState("");
+
+  // use effect
+  useEffect(() => {
+    axios
+      .get("http://localhost:3001/contacts")
+      .then()
+      .then((response) => setContacts(response.data));
+  }, []);
 
   function handleSubmit(e) {
     e.preventDefault();

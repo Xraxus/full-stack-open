@@ -1,0 +1,9 @@
+{
+  "contacts": [
+    { "name": "Arto Hellas", "tel": 123456789 },
+    { "name": "Ada Lovelace", "tel": 394453235 },
+    { "name": "Dan Abramov", "tel": 12432343 },
+    { "name": "Mary Poppendieck", "tel": 392364231 },
+    { "name": "Leia Oregano", "tel": 456123789 }
+  ]
+}
