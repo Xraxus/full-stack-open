@@ -1,4 +1,7 @@
 import { useState } from "react";
+import Filter from "./components/Filter";
+import ContactForm from "./components/ContactForm";
+import ContactList from "./components/ContactList";
 
 function App() {
   const [contacts, setContacts] = useState([
@@ -10,12 +13,6 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newTel, setNewTel] = useState("");
   const [filterName, setFilterName] = useState("");
-
-  const filteredConcats = filterName
-    ? contacts.filter((contact) =>
-        contact.name.toLowerCase().includes(filterName.toLowerCase())
-      )
-    : contacts;
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -29,47 +26,17 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
-      <label>
-        filter by name:{" "}
-        <input
-          type="text"
-          value={filterName}
-          onChange={(e) => setFilterName(e.target.value)}
-        />
-      </label>
+      <Filter filterName={filterName} setFilterName={setFilterName} />
       <h2>Add new contact</h2>
-      <form onSubmit={handleSubmit} className="flex-column">
-        <label>
-          name:{" "}
-          <input
-            type="text"
-            value={newName}
-            onChange={(e) => setNewName(e.target.value)}
-            placeholder="Leia Skywalker"
-          />
-        </label>
-        <label>
-          number:{" "}
-          <input
-            type="tel"
-            pattern="[0-9]{9}"
-            placeholder="123456789"
-            value={newTel}
-            onChange={(e) => setNewTel(e.target.value)}
-          />
-        </label>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <ContactForm
+        handleSubmit={handleSubmit}
+        newName={newName}
+        setNewName={setNewName}
+        newTel={newTel}
+        setNewTel={setNewTel}
+      />
       <h2>Numbers</h2>
-      <ul>
-        {filteredConcats.map((contact) => (
-          <li key={contact.name}>
-            {contact.name} - {contact.tel}
-          </li>
-        ))}
-      </ul>
+      <ContactList filterName={filterName} contacts={contacts} />
     </div>
   );
 }
