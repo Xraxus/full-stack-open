@@ -7,5 +7,5 @@
 .flex-column {
   display: flex;
   flex-flow: column nowrap;
-  gap: 0.5em;
+  gap: 0.25em;
 }
