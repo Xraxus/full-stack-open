@@ -10,7 +10,12 @@ function create(newContact) {
   return axios.post(baseURL, newContact).then((response) => response.data);
 }
 
+function remove(id) {
+  return axios.delete(`${baseURL}/${id}`).then((response) => response.data);
+}
+
 export default {
   getAll,
   create,
+  remove,
 };

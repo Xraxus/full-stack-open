@@ -13,10 +13,14 @@ function App() {
   const [filterName, setFilterName] = useState("");
 
   useEffect(() => {
+    renderContacts();
+  }, []);
+
+  function renderContacts() {
     contactService
       .getAll()
       .then((initialContacts) => setContacts(initialContacts));
-  }, []);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -46,7 +50,12 @@ function App() {
         setNewTel={setNewTel}
       />
       <h2>Numbers</h2>
-      <ContactList filterName={filterName} contacts={contacts} />
+      <ContactList
+        filterName={filterName}
+        contacts={contacts}
+        remove={contactService.remove}
+        renderContacts={renderContacts}
+      />
     </div>
   );
 }
