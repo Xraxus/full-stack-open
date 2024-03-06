@@ -1,9 +1,34 @@
 {
   "contacts": [
-    { "name": "Arto Hellas", "tel": 123456789 },
-    { "name": "Ada Lovelace", "tel": 394453235 },
-    { "name": "Dan Abramov", "tel": 12432343 },
-    { "name": "Mary Poppendieck", "tel": 392364231 },
-    { "name": "Leia Oregano", "tel": 456123789 }
+    {
+      "name": "Arto Hellas",
+      "tel": 123456789,
+      "id": "ef82"
+    },
+    {
+      "name": "Ada Lovelace",
+      "tel": 394453235,
+      "id": "bf83"
+    },
+    {
+      "name": "Dan Abramov",
+      "tel": 12432343,
+      "id": "be05"
+    },
+    {
+      "name": "Mary Poppendieck",
+      "tel": 392364231,
+      "id": "6d87"
+    },
+    {
+      "name": "Leia Oregano",
+      "tel": 456123789,
+      "id": "f046"
+    },
+    {
+      "id": "d408",
+      "name": "Leia Kobylarz",
+      "tel": "160000041"
+    }
   ]
 }

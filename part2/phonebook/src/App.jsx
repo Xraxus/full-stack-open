@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react";
+
 import Filter from "./components/Filter";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
-import axios from "axios";
+
+import contactService from "./services/contact";
 
 function App() {
   const [contacts, setContacts] = useState([]);
@@ -10,19 +12,23 @@ function App() {
   const [newTel, setNewTel] = useState("");
   const [filterName, setFilterName] = useState("");
 
-  // use effect
   useEffect(() => {
-    axios
-      .get("http://localhost:3001/contacts")
-      .then()
-      .then((response) => setContacts(response.data));
+    contactService
+      .getAll()
+      .then((initialContacts) => setContacts(initialContacts));
   }, []);
 
   function handleSubmit(e) {
     e.preventDefault();
     if (contacts.some((contact) => contact.name === newName))
       alert(`${newName} is already in the phonebook`);
-    else setContacts([...contacts, { name: newName, tel: newTel }]);
+    else {
+      contactService
+        .create({ name: newName, tel: newTel })
+        .then((returnedContact) => {
+          setContacts(contacts.concat(returnedContact));
+        });
+    }
     setNewName("");
     setNewTel("");
   }
