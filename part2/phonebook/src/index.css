@@ -2,10 +2,59 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  background-color: #101010;
+  color: #f4f4f4;
+}
+
+body {
+  margin: 2rem;
+}
+.mg-l-10 {
+  margin-left: 10px;
+}
+.mg-block-5 {
+  margin-block: 5px;
 }
 
 .flex-column {
   display: flex;
   flex-flow: column nowrap;
   gap: 0.25em;
+}
+
+h1 {
+  color: green;
+  font-style: italic;
+  font-size: 3rem;
+}
+
+li {
+  padding-top: 0.25em;
+  font-size: 0.9375rem;
+}
+
+button {
+  background-color: darkgreen;
+  border: 1px solid lightgreen;
+  padding: 0.3em 0.5em;
+  color: #f4f4f4;
+}
+
+input {
+  background-color: #f4f4f4;
+  border: 1px solid lightgreen;
+  padding: 0.3em 0.5em;
+  color: #101010;
+}
+
+.status {
+  width: fit-content;
+  display: block;
+  color: green;
+  background: #f4f4f4;
+  font-size: 1.25rem;
+  border-style: solid;
+  border-radius: 5px;
+  padding: 0.25em 0.5em;
+  margin-bottom: 2em;
 }

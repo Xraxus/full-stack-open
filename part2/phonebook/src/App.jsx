@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import Filter from "./components/Filter";
 import ContactForm from "./components/ContactForm";
 import ContactList from "./components/ContactList";
+import Notification from "./components/Notification";
 
 import contactService from "./services/contact";
 
@@ -11,6 +12,7 @@ function App() {
   const [newName, setNewName] = useState("");
   const [newTel, setNewTel] = useState("");
   const [filterName, setFilterName] = useState("");
+  const [statusMessage, setStatusMessage] = useState(null);
 
   useEffect(() => {
     renderContacts();
@@ -20,6 +22,13 @@ function App() {
     contactService
       .getAll()
       .then((initialContacts) => setContacts(initialContacts));
+  }
+
+  function renderTemporaryStatus(message) {
+    setStatusMessage(message);
+    setTimeout(() => {
+      setStatusMessage(null);
+    }, 3000);
   }
 
   function handleSubmit(e) {
@@ -40,14 +49,16 @@ function App() {
             tel: newTel,
             name: newName,
           })
-          .then(renderContacts);
+          .then(renderContacts)
+          .then(renderTemporaryStatus(`Modified ${newName}`));
       }
     } else {
       contactService
         .create({ name: newName, tel: newTel })
         .then((returnedContact) => {
           setContacts(contacts.concat(returnedContact));
-        });
+        })
+        .then(renderTemporaryStatus(`Added ${newName}`));
     }
     setNewName("");
     setNewTel("");
@@ -56,6 +67,7 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={statusMessage} />
       <Filter filterName={filterName} setFilterName={setFilterName} />
       <h2>Add new contact</h2>
       <ContactForm
