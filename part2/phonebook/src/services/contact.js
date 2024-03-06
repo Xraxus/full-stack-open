@@ -14,8 +14,15 @@ function remove(id) {
   return axios.delete(`${baseURL}/${id}`).then((response) => response.data);
 }
 
+function update(id, updatedContact) {
+  return axios
+    .put(`${baseURL}/${id}`, updatedContact)
+    .then((response) => response.data);
+}
+
 export default {
   getAll,
   create,
   remove,
+  update,
 };

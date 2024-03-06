@@ -24,9 +24,25 @@ function App() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    if (contacts.some((contact) => contact.name === newName))
-      alert(`${newName} is already in the phonebook`);
-    else {
+    const duplicated = contacts.find(
+      (contact) => contact.name.toLowerCase() === newName.toLowerCase()
+    );
+
+    if (duplicated) {
+      if (
+        window.confirm(
+          `${newName} is already in the phonebook, replace the old number with a new one?`
+        )
+      ) {
+        contactService
+          .update(duplicated.id, {
+            id: duplicated.id,
+            tel: newTel,
+            name: newName,
+          })
+          .then(renderContacts);
+      }
+    } else {
       contactService
         .create({ name: newName, tel: newTel })
         .then((returnedContact) => {

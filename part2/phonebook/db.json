@@ -1,6 +1,16 @@
 {
   "contacts": [
     {
+      "name": "Arto Hellas",
+      "tel": 123456789,
+      "id": "ef82"
+    },
+    {
+      "name": "Ada Lovelace",
+      "tel": 394453235,
+      "id": "bf83"
+    },
+    {
       "name": "Dan Abramov",
       "tel": 12432343,
       "id": "be05"
@@ -14,6 +24,16 @@
       "name": "Leia Oregano",
       "tel": 456123789,
       "id": "f046"
+    },
+    {
+      "id": "d408",
+      "name": "Leia Kobylarz",
+      "tel": "160000041"
+    },
+    {
+      "id": "b7e1",
+      "tel": "123333321",
+      "name": "Kamil Kobylarz"
     }
   ]
 }
