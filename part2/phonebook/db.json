@@ -1,11 +1,6 @@
 {
   "contacts": [
     {
-      "name": "Dan Abramov",
-      "tel": 12432343,
-      "id": "be05"
-    },
-    {
       "name": "Mary Poppendieck",
       "tel": 392364231,
       "id": "6d87"
@@ -19,16 +14,6 @@
       "id": "d408",
       "name": "Leia Kobylarz",
       "tel": "160000041"
-    },
-    {
-      "id": "b7e1",
-      "tel": "123333321",
-      "name": "Kamil Kobylarz"
-    },
-    {
-      "id": "6d80",
-      "tel": "123456789",
-      "name": "Leia Skywalker"
     }
   ]
 }

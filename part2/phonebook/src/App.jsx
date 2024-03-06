@@ -24,8 +24,8 @@ function App() {
       .then((initialContacts) => setContacts(initialContacts));
   }
 
-  function renderTemporaryStatus(message) {
-    setStatusMessage(message);
+  function renderTemporaryStatus(message, type) {
+    setStatusMessage({ message, type });
     setTimeout(() => {
       setStatusMessage(null);
     }, 3000);
@@ -50,7 +50,7 @@ function App() {
             name: newName,
           })
           .then(renderContacts)
-          .then(renderTemporaryStatus(`Modified ${newName}`));
+          .then(renderTemporaryStatus(`Modified ${newName}`, "status"));
       }
     } else {
       contactService
@@ -58,7 +58,7 @@ function App() {
         .then((returnedContact) => {
           setContacts(contacts.concat(returnedContact));
         })
-        .then(renderTemporaryStatus(`Added ${newName}`));
+        .then(renderTemporaryStatus(`Added ${newName}`, "status"));
     }
     setNewName("");
     setNewTel("");
@@ -67,7 +67,7 @@ function App() {
   return (
     <div>
       <h1>Phonebook</h1>
-      <Notification message={statusMessage} />
+      <Notification message={statusMessage?.message} type={statusMessage?.type} />
       <Filter filterName={filterName} setFilterName={setFilterName} />
       <h2>Add new contact</h2>
       <ContactForm
@@ -83,6 +83,8 @@ function App() {
         contacts={contacts}
         remove={contactService.remove}
         renderContacts={renderContacts}
+        renderTemporaryStatus={renderTemporaryStatus}
+        setContacts={setContacts}
       />
     </div>
   );

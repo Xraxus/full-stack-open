@@ -3,6 +3,8 @@ export default function ContactList({
   contacts,
   remove,
   renderContacts,
+  renderTemporaryStatus,
+  setContacts,
 }) {
   const filteredContacts = filterName
     ? contacts.filter((contact) =>
@@ -20,7 +22,15 @@ export default function ContactList({
               if (
                 window.confirm(`Do you really want to delete ${contact.name}?`)
               ) {
-                remove(contact.id).then(renderContacts);
+                remove(contact.id)
+                  .then(renderContacts)
+                  .catch((err) => {
+                    renderTemporaryStatus(
+                      `Data of ${contact.name} has already been deleted from the server`,
+                      "error"
+                    );
+                    setContacts(contacts.filter((c) => c.id !== contact.id));
+                  });
               }
             }}
           >
