@@ -1,4 +1,5 @@
 import CountryCard from "./CountryCard";
+import CountrySearchResult from "./CountrySearchResult";
 
 export default function SearchList({ searchQuery, allCountries }) {
   const filteredCountries = allCountries.filter((item) =>
@@ -10,11 +11,11 @@ export default function SearchList({ searchQuery, allCountries }) {
       return <CountryCard country={filteredCountries[0]} />;
     } else if (filteredCountries.length <= 10) {
       return (
-        <ul>
+        <>
           {filteredCountries.map((country) => (
-            <li key={country.ccn3}>{country.name.common}</li>
+            <CountrySearchResult country={country} key={country.name.common} />
           ))}
-        </ul>
+        </>
       );
     } else if (filteredCountries.length > 10) {
       return <p>Too much countries matched, specify further</p>;
