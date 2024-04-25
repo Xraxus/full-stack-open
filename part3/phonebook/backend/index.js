@@ -1,7 +1,10 @@
 const express = require("express");
 const morgan = require("morgan");
+const cors = require("cors");
+
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(
   morgan(function (tokens, req, res) {
@@ -55,12 +58,6 @@ const generateNewId = () => {
 
   return newId;
 };
-
-app.get("/", (req, res) => {
-  res.send(
-    "<h1>Hello There</h1><img src='https://gifdb.com/images/high/cute-adorable-dog-dachshund-awkward-smile-j2swe3k0n4n97o0s.webp' alt='smiling dachshund'/>"
-  );
-});
 
 app.get("/info", (req, res) => {
   const date = new Date();

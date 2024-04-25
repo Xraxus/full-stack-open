@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 export default function ContactList({
   filterName,
   contacts,
@@ -16,7 +17,7 @@ export default function ContactList({
     <ul>
       {filteredContacts.map((contact) => (
         <li key={contact.id}>
-          {contact.name} - {contact.tel}{" "}
+          {contact.name} - {contact.number}{" "}
           <button
             onClick={() => {
               if (
@@ -24,7 +25,7 @@ export default function ContactList({
               ) {
                 remove(contact.id)
                   .then(renderContacts)
-                  .catch((err) => {
+                  .catch(() => {
                     renderTemporaryStatus(
                       `Data of ${contact.name} has already been deleted from the server`,
                       "error"

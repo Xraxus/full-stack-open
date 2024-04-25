@@ -1,9 +1,10 @@
+/* eslint-disable react/prop-types */
 export default function ContactForm({
   handleSubmit,
   newName,
   setNewName,
-  newTel,
-  setNewTel,
+  newNumber,
+  setNewNumber,
 }) {
   return (
     <form onSubmit={handleSubmit} className="flex-column">
@@ -22,8 +23,8 @@ export default function ContactForm({
           type="tel"
           pattern="[0-9]{9}"
           placeholder="123456789"
-          value={newTel}
-          onChange={(e) => setNewTel(e.target.value)}
+          value={newNumber}
+          onChange={(e) => setNewNumber(e.target.value)}
         />
       </label>
       <div>

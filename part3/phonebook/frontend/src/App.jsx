@@ -10,7 +10,7 @@ import contactService from "./services/contact";
 function App() {
   const [contacts, setContacts] = useState([]);
   const [newName, setNewName] = useState("");
-  const [newTel, setNewTel] = useState("");
+  const [newNumber, setNewNumber] = useState("");
   const [filterName, setFilterName] = useState("");
   const [statusMessage, setStatusMessage] = useState(null);
 
@@ -46,7 +46,7 @@ function App() {
         contactService
           .update(duplicated.id, {
             id: duplicated.id,
-            tel: newTel,
+            number: newNumber,
             name: newName,
           })
           .then(renderContacts)
@@ -54,14 +54,14 @@ function App() {
       }
     } else {
       contactService
-        .create({ name: newName, tel: newTel })
+        .create({ name: newName, number: newNumber })
         .then((returnedContact) => {
           setContacts(contacts.concat(returnedContact));
         })
         .then(renderTemporaryStatus(`Added ${newName}`, "status"));
     }
     setNewName("");
-    setNewTel("");
+    setNewNumber("");
   }
 
   return (
@@ -74,8 +74,8 @@ function App() {
         handleSubmit={handleSubmit}
         newName={newName}
         setNewName={setNewName}
-        newTel={newTel}
-        setNewTel={setNewTel}
+        newNumber={newNumber}
+        setNewNumber={setNewNumber}
       />
       <h2>Numbers</h2>
       <ContactList
