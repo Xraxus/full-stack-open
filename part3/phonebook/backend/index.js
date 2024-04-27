@@ -6,9 +6,9 @@ const cors = require("cors");
 const Person = require("./models/person");
 const app = express();
 
-app.use(cors());
-app.use(express.json());
 app.use(express.static("dist"));
+app.use(express.json());
+app.use(cors());
 app.use(
   morgan(function (tokens, req, res) {
     return [
@@ -24,39 +24,27 @@ app.use(
   })
 );
 
-// const generateNewId = () => {
-//   const usedIds = persons.map((person) => person.id);
-//   let newId;
-//   do {
-//     newId = Math.floor(Math.random() * 99999);
-//   } while (usedIds.includes(newId));
-
-//   return newId;
-// };
-
-// app.get("/api/info", (req, res) => {
-//   const date = new Date();
-//   res.send(
-//     `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`
-//   );
-// });
-
 app.get("/api/persons", (req, res) => {
   Person.find({}).then((persons) => {
     res.json(persons);
   });
 });
 
-app.get("/api/persons/:id", (req, res) => {
-  Person.findById(req.params.id).then((person) => {
-    res.json(person);
-  });
+app.get("/api/persons/:id", (req, res, next) => {
+  Person.findById(req.params.id)
+    .then((person) => {
+      if (person) res.json(person);
+      else res.status(404).end();
+    })
+    .catch((error) => next(error));
 });
 
-app.delete("/api/persons/:id", (req, res) => {
-  Person.findByIdAndDelete(req.params.id).then(() => {
-    res.status(204).end();
-  });
+app.delete("/api/persons/:id", (req, res, next) => {
+  Person.findByIdAndDelete(req.params.id)
+    .then(() => {
+      res.status(204).end();
+    })
+    .catch((error) => next(error));
 });
 
 app.post("/api/persons", (req, res) => {
@@ -83,6 +71,17 @@ const unknownEndpoint = (request, response) => {
 };
 
 app.use(unknownEndpoint);
+
+const errorHandler = (error, request, response, next) => {
+  console.error(error.message);
+
+  if (error.name === "CastError") {
+    return response.status(400).send({ error: "malformatted id" });
+  }
+
+  next(error);
+};
+app.use(errorHandler);
 
 const PORT = process.env.PORT;
 
