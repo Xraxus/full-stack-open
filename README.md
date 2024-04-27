@@ -1,6 +1,6 @@
 # Full Stack Open Exercises Repository
 
-Welcome to my repository for the exercises from the [Full Stack Open course](https://fullstackopen.com/)!
+Welcome to my repository for the exercises from the [Full Stack Open course](https://fullstackopen.com/en/)!
 
 This repository contains my solutions and projects for the Full Stack Open course, an open program offered by the University of Helsinki. It offers a deep dive into modern web development, covering the following topics:
 
