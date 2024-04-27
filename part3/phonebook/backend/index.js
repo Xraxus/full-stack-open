@@ -1,7 +1,9 @@
+require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 
+const Person = require("./models/person");
 const app = express();
 
 app.use(cors());
@@ -60,26 +62,23 @@ const generateNewId = () => {
   return newId;
 };
 
-app.get("/info", (req, res) => {
-  const date = new Date();
-  res.send(
-    `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`
-  );
-});
+// app.get("/api/info", (req, res) => {
+//   const date = new Date();
+//   res.send(
+//     `<p>Phonebook has info for ${persons.length} people</p><p>${date}</p>`
+//   );
+// });
 
 app.get("/api/persons", (req, res) => {
-  res.json(persons);
+  Person.find({}).then((persons) => {
+    res.json(persons);
+  });
 });
 
 app.get("/api/persons/:id", (req, res) => {
-  const id = +req.params.id;
-  const person = persons.find((person) => person.id === id);
-  if (person) {
+  Person.findById(req.params.id).then((person) => {
     res.json(person);
-  } else {
-    res.statusMessage = "Person of such ID wasn't found";
-    res.status(404).end();
-  }
+  });
 });
 
 app.delete("/api/persons/:id", (req, res) => {
@@ -120,7 +119,7 @@ const unknownEndpoint = (request, response) => {
 
 app.use(unknownEndpoint);
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT;
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
