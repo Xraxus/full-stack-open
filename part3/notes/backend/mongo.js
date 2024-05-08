@@ -1,17 +1,17 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose')
 
-const url = process.env.MONGODB_URI;
+const url = process.env.MONGODB_URI
 
-mongoose.set("strictQuery", false);
+mongoose.set('strictQuery', false)
 
-mongoose.connect(url);
+mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
   important: Boolean,
-});
+})
 
-const Note = mongoose.model("Note", noteSchema);
+const Note = mongoose.model('Note', noteSchema)
 
 // const note = new Note({
 //   content: "Express is not that hard",
@@ -25,7 +25,7 @@ const Note = mongoose.model("Note", noteSchema);
 
 Note.find({ important: false }).then((result) => {
   result.forEach((note) => {
-    console.log(note);
-  });
-  mongoose.connection.close();
-});
+    console.log(note)
+  })
+  mongoose.connection.close()
+})
